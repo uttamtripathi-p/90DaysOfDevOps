@@ -3,7 +3,7 @@
 i) Hardware layer
 ii) Shell
 iii) Kernel
-iv) System libraries
+iv) System libraries/USER/APLLICATIONS
 v) System utilities(like,GNU)
 
 # How processes are created in linux
@@ -36,4 +36,13 @@ A process transitions through several states during its lifecycle:
 1. Standardization: It provides a consistent, standardized framework across many different Linux distributions, making system administration and development more uniform [2].
 2. Faster Boot Times: Its design allows for aggressive parallelization during startup, which dramatically decreases the time it takes for a system to become usable [2].
 3. Modern Features: It offers robust features essential for modern computing, such as cgroup management for resource control, on-demand service activation, and better security isolation for services [1, 2].
-4. 
+
+# List of 5 commands that I will be using daily
+
+1. cd
+2. ls
+3. pwd
+4. touch
+5. man
+   
+
