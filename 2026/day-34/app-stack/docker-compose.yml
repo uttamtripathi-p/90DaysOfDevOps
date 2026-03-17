@@ -1,0 +1,49 @@
+services:
+  web:
+    build: .
+    networks: 
+      - backend
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_started
+    labels:
+      app: "myapp"
+      environment: "development"
+    ports:
+      - "8080:5000"
+  db:
+    image: mysql:8.0
+    restart: on-failure
+    container_name: mysql
+    networks:
+      - backend
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: mysqldb
+    healthcheck:
+       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=password"]
+       interval: 10s
+       timeout: 5s
+       retries: 5
+       start_period: 10s
+    volumes:
+      - mysql_data:/var/lib/mysql
+    labels:
+      app: "myapp"
+      environment: "development"
+  cache:
+    image: redis:alpine
+    networks:
+      - backend
+    labels:
+      app: "myapp"
+      environment: "development"
+
+volumes:
+  mysql_data:
+networks:
+  backend:
