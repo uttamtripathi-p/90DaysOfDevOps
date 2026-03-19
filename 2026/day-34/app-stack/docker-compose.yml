@@ -11,8 +11,7 @@ services:
     labels:
       app: "myapp"
       environment: "development"
-    ports:
-      - "8080:5000"
+    
   db:
     image: mysql:8.0
     restart: on-failure
