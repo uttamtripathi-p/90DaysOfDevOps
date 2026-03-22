@@ -1,0 +1,34 @@
+server:
+  name:
+    - nginx
+    - apache
+  ip:
+    - 172.273.232.0
+    - 282.211.322.3
+  port:
+    - 80
+    - 5000
+database:
+  host:
+    - mysql
+    - flask
+  name:
+    - etcd
+    - sqld
+  credentials:
+    user:
+      - uttam
+      - tripathi
+    password:
+      - uttam123
+      - tripathi123
+     
+startup_script:
+  run: |
+   It will keep
+   every line separate
+  runs: >
+   It will print 
+   whole output
+   at once 
+
