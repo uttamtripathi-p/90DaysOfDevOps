@@ -8,4 +8,4 @@
 # How do you read the error?
 ## The mental order — always read bottom to top
 ## The last line tells you what failed, but the lines above tell you why. 
-## Most people stare at the bottom and miss the actual reason sitting a few lines up.
+## Most people stare at the bottom and miss the actual reason sitting a few lines up
