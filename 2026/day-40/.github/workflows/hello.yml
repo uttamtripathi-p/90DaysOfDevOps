@@ -2,8 +2,7 @@ name: hello
 on:
   push:
     branch:
-      - main
-      - master
+`      - master
 jobs:
   greet:
     runs-on: ubuntu-latest
