@@ -1,0 +1,57 @@
+name: multi-job
+on: workflow_dispatch    
+env: 
+    APP_NAME: myapp
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        env:
+            ENVIRONMENT: staging
+        steps:
+            - name: build
+              env:
+                VERSION: 1.0.0
+              run: | 
+                echo "Building the app"
+                echo "The app name is $APP_NAME"
+                echo "The environment is $ENVIRONMENT"
+                echo "The version is $VERSION"
+              
+    test:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - name: test
+              run: echo "Running tests"
+            - name: Run a specific script only on main branch
+              if: github.ref == 'refs/heads/main'
+              run: |
+                echo "Running additional tests for main branch"
+    deploy:
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+            - name: deploy
+              run: echo "Deploying"
+    outputs:
+        runs-on: ubuntu-latest
+        steps:
+            - name: set output
+              id: set_output
+              run: echo "date=$(date)" >> $GITHUB_OUTPUT
+            - name: read output
+              run: echo "The current date is ${{ steps.set_output.outputs.date}}"
+            - name: main step
+              id: main_step
+              run: echo "doing something"
+
+            - name: This runs only if previous step failed
+              if: failure()
+              run: echo "Previous step failed, nothing to do"
+            - name: This step gets ignored if it failed and other runs normally
+              continue-on-error: true
+              run: |
+                echo "This step might fail but it won't affect the rest of the workflow"
+            - name: This step only runs on push events not on pull request
+              if: github.event_name == 'push'
+              run: echo "This runs only on push events"
