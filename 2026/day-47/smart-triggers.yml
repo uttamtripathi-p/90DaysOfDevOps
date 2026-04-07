@@ -1,0 +1,15 @@
+name: smart triggers
+on: 
+    push:
+        branches:
+            - main
+            - release/*
+        paths:
+            - 'src/**'
+            - 'app/**'
+jobs:
+    path_to_trigger:
+        runs-on: ubuntu-latest
+        steps:
+            - name: branch where is workflow
+              run: echo "${{ github.ref_name }}"

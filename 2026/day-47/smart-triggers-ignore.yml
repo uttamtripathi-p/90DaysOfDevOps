@@ -1,0 +1,17 @@
+name: files to ignore
+on: 
+    push:
+        branches:
+            - main
+            - release/*
+
+        paths-ignore:
+     
+            - '*.md'
+            - 'docs/**'
+jobs:
+    path_to_ignore:
+        runs-on: ubuntu-latest
+        steps:
+            - name: branch where is workflow
+              run: echo "${{ github.ref_name }}"

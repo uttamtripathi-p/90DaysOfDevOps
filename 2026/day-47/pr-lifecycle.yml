@@ -1,0 +1,20 @@
+name: pull request events
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    
+
+jobs:
+  log-event:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print trigger action
+        run: echo "${{ github.event.action }}"
+      - name: print pr title
+        run: echo "${{ github.event.pull_request.title }}"
+      - name: print pull request author
+        run: echo "${{ github.event.pull_request.user.login }}"
+      - name: print source branch
+        run: echo "${{ github.head_ref }}"
+      - name: print target branch
+        run: echo "${{ github.base_ref }}"

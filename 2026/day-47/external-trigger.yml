@@ -1,0 +1,20 @@
+name: Repository dispatch trigger
+on:
+    repository_dispatch:
+        types: ["deploy-request"]
+
+
+jobs:
+    external_trigger:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Respond to event type
+              run: echo "${{ github.event.client_payload.environment }}"
+            
+
+
+
+
+
+
+
