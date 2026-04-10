@@ -256,7 +256,7 @@ jobs:
 ![alt text](day-48.png)
 
 
-# Docker Hub link to your pushed image
+# Docker Hub link to my pushed image
 ## https://hub.docker.com/repository/docker/uttamtripathi/github-actions-capstone
 
 
