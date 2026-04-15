@@ -64,7 +64,7 @@ spec: # deployment's information of what to create like replicas and pod templat
 ### In a rolling update, old pods keep running while creating new pods and after successfull creation,old pods gets deleted.
 ### Rollback = going back to a previous working version of your Deployment.
 ### How it actually works
-#### Every time you update a Deployment, Kubernetes keeps revision history (ReplicaSets)
+#### Every time you update a Deployment, Kubernetes keeps revision history ((ReplicaSets))
 #### If the new version is broken, you can revert to a previous ReplicaSet
 
 
