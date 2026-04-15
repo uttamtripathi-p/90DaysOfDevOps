@@ -1,3 +1,4 @@
+
 # What problem Services solve and how they relate to Pods and Deployments
 ## Pods are ephemeral and get new IP addresses when they restart; Services provide a single, permanent IP and DNS name to act as a stable entry point. They decouple the requester from the specific backend Pods, ensuring traffic always finds a healthy instance.
 
