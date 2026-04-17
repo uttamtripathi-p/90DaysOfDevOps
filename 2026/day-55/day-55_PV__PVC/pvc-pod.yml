@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+  namespace: volumes
+spec:
+  containers:
+    - name: busybox
+      image: busybox:latest
+      volumeMounts:
+      - mountPath: "/data"
+        name: mypvc
+      command: ["/bin/sh"]
+      args:
+      - "-c"
+      - |
+        mkdir -p /data
+        MSG="[$(date '+%Y-%m-%d %H:%M:%S')] Message written"
+        echo "$MSG" > /data/message.txt
+        echo "$MSG"
+        tail -f /dev/null  
+  volumes:
+    - name: mypvc
+      persistentVolumeClaim:
+        claimName: myclaim 

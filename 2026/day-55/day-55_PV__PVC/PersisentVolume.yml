@@ -1,0 +1,15 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: static-provision-volume
+  labels:
+    day: day-55
+spec:
+  storageClassName: manual 
+  capacity: 
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /tmp/k8s-pv-data
