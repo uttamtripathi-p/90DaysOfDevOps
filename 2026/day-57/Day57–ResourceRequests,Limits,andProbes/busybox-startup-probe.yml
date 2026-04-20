@@ -1,0 +1,34 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: busybox
+spec:
+  containers:
+    - name: busybox
+      image: busybox:latest
+      command: ["sh","-c","sleep 20 && touch /tmp/started && touch /tmp/healthy && sleep 600 "]
+      resources:
+        requests:
+          memory: "128Mi"
+          cpu: "100m"
+        limits:
+          memory: "256Mi"
+          cpu: "250m"
+      startupProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/started
+        periodSeconds: 5         # check every 5s
+        failureThreshold: 12     # allow up to 60s for startup (5 × 12)
+        timeoutSeconds: 1
+         
+      livenessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 0   # no extra delay — startup probe handles the wait
+        periodSeconds: 5
+        failureThreshold: 3
+        timeoutSeconds: 1 

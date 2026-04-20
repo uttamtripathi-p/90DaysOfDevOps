@@ -1,0 +1,12 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: polinux
+spec:
+  containers:
+    - name: app
+      image: polinux/stress
+      resources:
+        requests:
+          memory: "128Mi"
+          cpu: "100"
