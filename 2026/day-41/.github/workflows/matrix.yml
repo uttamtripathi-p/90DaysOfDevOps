@@ -1,0 +1,25 @@
+name: matrix build
+on:
+  push:
+    branches: [main]
+
+jobs:
+  py_matrix:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.10", "3.11", "3.12"]
+        exclude:
+          - os: ubuntu-latest
+            python-version: "3.10"
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with: 
+          python-version: ${{ matrix.python-version }}
+
+

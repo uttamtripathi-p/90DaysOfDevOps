@@ -1,0 +1,13 @@
+# List of commands used
+- lsblk
+- pvcreate </dev/xvd(f-z)>
+- pvs ( to see created physical volume)
+- vgcreate <name> <from>
+- vgs (to see list of volume groups)
+- lvcreate
+- mkdir
+- mkfs
+- mount
+- lvextend
+- resize2fs
+- df -h

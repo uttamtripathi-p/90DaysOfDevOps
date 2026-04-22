@@ -1,0 +1,28 @@
+name: scheduled workflows with cronjob
+on:
+  workflow_dispatch:
+  schedule: 
+    - cron: '30 2 * * 1'
+    - cron: '0 */6 * * *'
+
+jobs:
+  schedule_triggered:
+    runs-on: ubuntu-latest
+    steps:
+      - name: schedule trigger used
+        run: |
+           if [ -z "${{ github.event.schedule }}" ]; then
+             echo "Triggered manually via workflow_dispatch"
+            else
+              echo "Triggered by cron: ${{ github.event.schedule }}"
+           fi
+      - name: Health check
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" -L https://google.com )
+          if [ "$response" -ne 200 ]; then
+            echo "Health check failed! Response code: $response"
+            exit 1
+          else
+            echo "Health check passed!"
+          fi
+

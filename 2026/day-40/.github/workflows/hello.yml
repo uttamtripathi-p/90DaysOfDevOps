@@ -1,0 +1,25 @@
+name: hello
+on:
+  push:
+    branch:
+`      - master
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+      - name: to print hello
+        run: |
+          echo "Hello from github actions"
+          echo "$(date)"
+          echo "Branch name: ${{ github.ref_name }}"
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: List files
+        run: ls -la
+      - name: printing operating system
+        run: hostnamectl
+          
+
+          

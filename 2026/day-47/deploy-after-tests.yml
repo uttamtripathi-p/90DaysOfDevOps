@@ -1,0 +1,21 @@
+name: deploy
+on:
+    workflow_run:
+        workflows: ["Run Tests"]
+        types: [completed]
+
+jobs:
+    condition:
+        runs-on: ubuntu-latest
+        steps:
+            - name: condition to fulfill
+              run: |
+            
+                if [ "${{ github.event.workflow_run.conclusion }}" == 'success' ]; then
+                    echo "The workflow is running successfully"
+                else
+                    echo "Trigger Workflow failed"
+                    exit 1
+                fi
+            - name: deploy-tests 
+              run: echo "This message is printed when workflow is triggered after successfull completion of another workflow"

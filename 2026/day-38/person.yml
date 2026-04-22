@@ -1,0 +1,12 @@
+name: uttam
+role: linux and devops roles
+experience_years: fresher
+learning: true
+tools:
+  - docker containerization and compose
+  - linux
+  - kubernetes
+  - Github actions CI/CD
+  - git/github
+hobbies: [Debugging, Teaching]
+

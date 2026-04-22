@@ -1,0 +1,27 @@
+# Problem - Data lost on pod recreation
+
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: ephermal-pod
+  namespace: volumes
+spec:
+  containers: 
+    - name: busybox
+      image: busybox:latest
+      command: ["/bin/sh"]
+      args:
+      - "-c"
+      - |
+        mkdir -p /data
+        MSG="[$(date '+%Y-%m-%d %H:%M:%S')] Message written"
+        echo "$MSG" > /data/message.txt
+        echo "$MSG" 
+        tail -f /dev/null
+      volumeMounts:
+        - mountPath: /cache
+          name: empty-volume
+  volumes:
+    - name: empty-volume
+      emptyDir: {}

@@ -1,0 +1,23 @@
+name: hello
+on:
+  schedule:
+    - cron: "0 0 * * *"
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+      - name: to print hello
+        run: |
+          echo "Hello from github actions"
+          echo "$(date)"
+          echo "Branch name: ${{ github.ref_name }}"
+
+      - name: List files
+        run: ls -la
+      - name: printing operating system
+        run: hostnamectl
+          
+
+          
