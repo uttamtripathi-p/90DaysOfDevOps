@@ -1,0 +1,61 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: wp-deployment
+  namespace: capstone
+  labels:
+    app: wp
+spec: 
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wp
+  template:
+    metadata:
+      labels:
+        app: wp
+    spec: 
+      containers:
+      - name: wordpress
+        image: wordpress:latest
+        ports:
+        - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: myconfig
+        env:
+          - name: WORDPRESS_DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: my-secret
+                key: MYSQL_USER
+          - name: WORDPRESS_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: my-secret 
+                key: MYSQL_PASSWORD
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        readinessProbe:
+          httpGet:
+            path: /wp-login.php
+            port: 80
+              
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          failureThreshold: 5
+          timeoutSeconds: 30
+        livenessProbe: 
+          httpGet:
+            path: /wp-login.php
+            port: 80
+          initialDelaySeconds: 180
+          periodSeconds: 10
+          failureThreshold: 3
+          timeoutSeconds: 5    
+             

@@ -1,0 +1,7 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: myconfig
+data:
+  WORDPRESS_DB_HOST: "mysql-0.my-service.capstone.svc.cluster.local:3306"
+  WORDPRESS_DB_NAME: "mydb"
